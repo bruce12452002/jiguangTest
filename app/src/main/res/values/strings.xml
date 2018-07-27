@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ABCApplication</string>
+    <string name="submit">送出</string>
+    <string name="add">增加標籤</string>
+    <string name="remove">移除標籤</string>
+    <string name="title_activity_page2">我是第二頁</string>
+    <string name="jump">第二頁</string>
+    <string name="rtn">回第一頁</string>
+</resources>
