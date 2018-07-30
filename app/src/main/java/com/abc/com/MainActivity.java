@@ -2,6 +2,7 @@ package com.abc.com;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button p2 = findViewById(R.id.p2);
         p2.setOnClickListener(v -> {
+            /*
+            Uri uri= Uri.parse("http://www.google.com");
+            Intent i=new Intent(Intent.ACTION_VIEW,uri);
+            MainActivity.this.startActivity(i);
+*/
             Intent i = new Intent();
             i.setClass(MainActivity.this, Page2.class);
             this.startActivity(i);

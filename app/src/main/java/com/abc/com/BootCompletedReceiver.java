@@ -4,10 +4,16 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
 
 import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -25,8 +31,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
 
-            openNotification(context,bundle);
-
+            //openNotification(context,bundle);
+            openURL(context, bundle);
         }
 
 /*
@@ -48,7 +54,41 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     }
 
-    private void openNotification(Context context, Bundle bundle){
+    WebView webview;
+    private void openURL(Context context, Bundle bundle) {
+        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        String myValue = "";
+        try {
+            //extras = "{\"myKey\":\"http://www.google.com\"}";
+            JSONObject extrasJson = new JSONObject(extras);
+            System.out.println("JsonJsonJson=" + extrasJson);
+            myValue = extrasJson.optString("myKey");
+
+/*
+            WebView myWebView = (WebView) findViewById(R.id.webview);
+            myWebView.loadUrl("https://www.example.com");
+            //webview.loadUrl("http://www.google.com");
+            */
+
+            Uri uri= Uri.parse("http://www.google.com");
+            Intent i=new Intent(Intent.ACTION_VIEW,uri);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+
+            /*
+            URL url = new URL("http://www.google.com");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(15000);//设置链接超时时间
+            conn.setReadTimeout(15000);//设置读取超时时间
+            conn.setRequestMethod("GET");//设置请求参数
+            conn.setRequestProperty("Connection", "Keep-Alive");//添加Header
+            */
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    private void openNotification(Context context, Bundle bundle) {
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
         String myValue = "";
         try {
