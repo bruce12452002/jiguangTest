@@ -31,8 +31,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
 
-            //openNotification(context,bundle);
-            openURL(context, bundle);
+            openNotification(context,bundle);
+            //openURL(context, bundle);
         }
 
 /*
@@ -63,12 +63,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             JSONObject extrasJson = new JSONObject(extras);
             System.out.println("JsonJsonJson=" + extrasJson);
             myValue = extrasJson.optString("myKey");
-
-/*
-            WebView myWebView = (WebView) findViewById(R.id.webview);
-            myWebView.loadUrl("https://www.example.com");
-            //webview.loadUrl("http://www.google.com");
-            */
 
             Uri uri= Uri.parse("http://www.google.com");
             Intent i=new Intent(Intent.ACTION_VIEW,uri);
